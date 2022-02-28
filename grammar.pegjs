@@ -4,6 +4,14 @@ start
 Term
     = w: word ws {return w}
     / d: digits ws {return d}
+    / c: string ws {return c}
+
+string
+    = (["]str["]) {return {type:"T_string",value: text()}}
+    / ([']str[']) {return {type:"T_string",value: text()}}
+
+str
+    = (word / digits)* {return text()}
 
 word
     = letter+ { return {type:"T_WORD",value:text()}}
